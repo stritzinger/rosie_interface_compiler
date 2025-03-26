@@ -54,6 +54,7 @@ generate_interface(PkgName, Tag, ActionName, Filename, {Constants, Items}) ->
             "% self include\n"
             "-include(\"" ++ PkgName ++ "_" ++ InterfaceName ++
             "_msg.hrl\").\n"
+            "-include_lib(\"stdlib/include/assert.hrl\").\n"
             "\n"
             "get_type() ->\n"
 
@@ -61,14 +62,14 @@ generate_interface(PkgName, Tag, ActionName, Filename, {Constants, Items}) ->
             case ActionName of
                 "" -> "";
                 _ -> ActionName++"_"
-            end 
+            end
             ++ Name ++ "_" ++
             "\".\n\n"
             "\n"
             "serialize("?PAYLOAD"0,#" ++
             PkgName ++ "_" ++ InterfaceName ++ "{" ++ Input ++
             "}) ->\n"
-            "\t" ++ 
+            "\t" ++
             case Serializer of
                 [] ->
                     "";

@@ -60,6 +60,7 @@ generate_interface(PkgName, Tag, ActionName, Filename, {Constants, Request, Repl
             "% self include\n"
             "-include(\"" ++ PkgName ++ "_" ++ InterfaceName ++
             "_srv.hrl\").\n"
+            "-include_lib(\"stdlib/include/assert.hrl\").\n"
             "\n"
             "% GENERAL\n"
             "\n"
