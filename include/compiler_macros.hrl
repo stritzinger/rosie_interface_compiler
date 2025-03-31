@@ -40,17 +40,7 @@
 break_binary(Bin, Length, TypeBitLength) ->
 	?assertMatch(Length, byte_size(Bin)),
 	?assert(TypeBitLength rem 8 == 0),
-	TypeLength = TypeBitLength div 8,
-	Bytes = binary:bin_to_list(Bin),
-    {Result, _} = lists:foldl(
-		fun(_, {Result, BytesAcc}) ->
-			{SubBin, Rest} = lists:split(TypeLength, BytesAcc),
-			NewResult = [list_to_binary(SubBin) | Result],
-			{NewResult, Rest}
-		end,
-		{[],Bytes},
-		lists:seq(1, Length)),
-	lists:reverse(Result).
+        [B || <<B:(TypeBitLength div 8)/binary>> <= Bin].
 ").
 
 -define(SERIALIZE_ARRAY_CODE,
